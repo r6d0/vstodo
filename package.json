@@ -1,0 +1,72 @@
+{
+	"name": "vstodo",
+	"description": "VS Code extension for highlighting TODO, FIXME, and custom tags.",
+	"version": "0.0.1",
+	"publisher": "r6d0",
+	"repository": "https://github.com/r6d0/vstodo",
+	"engines": {
+		"vscode": "^1.100.0"
+	},
+	"activationEvents": [
+		"onStartupFinished"
+	],
+	"main": "./extension.js",
+	"contributes": {
+		"configuration": {
+			"title": "VSTodo extension",
+			"properties": {
+				"vstodo.keywords": {
+					"type": "array",
+					"title": "Highlighting rules",
+					"items": {
+						"type": "object",
+						"properties": {
+							"keyword": {
+								"type": "string",
+								"title": "Keyword",
+								"description": "Text to highlight"
+							},
+							"background": {
+								"type": "string",
+								"format": "color-hex",
+								"title": "Background",
+								"description": "Background color (HEX)"
+							},
+							"foreground": {
+								"type": "string",
+								"format": "color-hex",
+								"title": "Foreground",
+								"description": "Foreground color (HEX)"
+							},
+							"isWholeLine": {
+								"type": "boolean",
+								"title": "isWholeLine",
+								"description": "Highlight whole line",
+								"default": false
+							}
+						}
+					},
+					"default": [
+						{
+							"keyword": "TODO",
+							"background": "#ffeb3b4d",
+							"foreground": "#ffc107cc",
+							"isWholeLine": false
+						},
+						{
+							"keyword": "FIXME",
+							"background": "#ff3b3b4d",
+							"foreground": "#ff0707cc",
+							"isWholeLine": true
+						}
+					],
+					"description": "Keywords to highlight"
+				}
+			}
+		}
+	},
+	"scripts": {},
+	"devDependencies": {
+		"@types/vscode": "^1.100.0"
+	}
+}
