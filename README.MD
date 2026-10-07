@@ -8,7 +8,6 @@
 * **On-the-Fly Configuration** - Customize your tags instantly without restarting the editor.
 * **Flexible Styling** - Choose custom color for each tag.
 
----
 
 ## Configuration Settings
 
@@ -37,5 +36,3 @@ Here is an example of settings:
 * `foreground` (string) - Text color (HEX).
 * `background` (string) - Background color (HEX).
 * `isWholeLine` (boolean) - Highlight whole line.
-
----
