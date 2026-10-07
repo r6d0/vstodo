@@ -15,7 +15,7 @@
 		"configuration": {
 			"title": "VSTodo extension",
 			"properties": {
-				"vstodo.keywords": {
+				"vstodo.tags": {
 					"type": "array",
 					"title": "Highlighting rules",
 					"items": {
@@ -23,7 +23,7 @@
 						"properties": {
 							"keyword": {
 								"type": "string",
-								"title": "Keyword",
+								"title": "Tag",
 								"description": "Text to highlight"
 							},
 							"background": {
@@ -36,7 +36,7 @@
 								"type": "string",
 								"format": "color-hex",
 								"title": "Foreground",
-								"description": "Foreground color (HEX)"
+								"description": "Text color (HEX)"
 							},
 							"isWholeLine": {
 								"type": "boolean",
@@ -48,19 +48,19 @@
 					},
 					"default": [
 						{
-							"keyword": "TODO",
+							"tag": "TODO",
 							"background": "#ffeb3b4d",
 							"foreground": "#ffc107cc",
 							"isWholeLine": false
 						},
 						{
-							"keyword": "FIXME",
+							"tag": "FIXME",
 							"background": "#ff3b3b4d",
 							"foreground": "#ff0707cc",
-							"isWholeLine": true
+							"isWholeLine": false
 						}
 					],
-					"description": "Keywords to highlight"
+					"description": "Tags to highlight"
 				}
 			}
 		}

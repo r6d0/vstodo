@@ -4,7 +4,7 @@ const BOUNDARY_REGEXP = /^[\p{L}0-9]$/u
 const DEBOUNCE_TIMEOUT = 100
 const CONFIG_NAME = 'vstodo'
 
-let keywordsConfig = []
+let tagsConfig = []
 
 function isFile(editor) {
     return editor.document.uri.scheme === 'file'
@@ -14,15 +14,15 @@ function isCorrectBoundary(symbol) {
     return symbol.length == 0 || !BOUNDARY_REGEXP.test(symbol)
 }
 
-function getPositions(document, keyword) {
+function getPositions(document, tag) {
     let text = document.getText()
     const txLength = text.length
-    const kwLength = keyword.length
+    const kwLength = tag.length
 
     let index = 0
     let result = []
     while (index != -1) {
-        index = text.indexOf(keyword, index)
+        index = text.indexOf(tag, index)
 
         if (index != -1) {
             let left = ''
@@ -44,12 +44,12 @@ function getPositions(document, keyword) {
     return result
 }
 
-function getKeywordsConfig() {
+function getTagsConfig() {
     const config = vscode.workspace.getConfiguration(CONFIG_NAME);
-    const keywords = []
-    for (let item of config.keywords) {
-        keywords.push({
-            keyword: item.keyword,
+    const tags = []
+    for (let item of config.tags) {
+        tags.push({
+            tag: item.tag,
             decoration: vscode.window.createTextEditorDecorationType({
                 backgroundColor: item.background,
                 color: item.foreground,
@@ -60,12 +60,12 @@ function getKeywordsConfig() {
             })
         })
     }
-    return keywords
+    return tags
 }
 
 async function analyzeOpenEditor(editor) {
-    for (let item of keywordsConfig) {
-        const positions = getPositions(editor.document, item.keyword)
+    for (let item of tagsConfig) {
+        const positions = getPositions(editor.document, item.tag)
         if (positions.length > 0) {
             editor.setDecorations(item.decoration, positions)
         }
@@ -73,7 +73,7 @@ async function analyzeOpenEditor(editor) {
 }
 
 async function activate(context) {
-    keywordsConfig = getKeywordsConfig()
+    tagsConfig = getTagsConfig()
 
     const editor = vscode.window.activeTextEditor
     if (editor && isFile(editor)) {
@@ -99,10 +99,10 @@ async function activate(context) {
 
     const changeConfiguration = vscode.workspace.onDidChangeConfiguration(async event => {
         if (event.affectsConfiguration(CONFIG_NAME)) {
-            for (let item of keywordsConfig) {
+            for (let item of tagsConfig) {
                 item.decoration.dispose()
             }
-            keywordsConfig = getKeywordsConfig()
+            tagsConfig = getTagsConfig()
         }
     })
 
